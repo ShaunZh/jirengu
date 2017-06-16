@@ -1,0 +1,81 @@
+/*
+* @Author: Marte
+* @Date:   2017-06-16 21:28:24
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-06-16 21:29:56
+*/
+*{
+  margin: 0;
+  padding: 0;
+}
+
+ul li{
+  list-style: none;
+}
+
+.clearfix:before,
+.clearfix:after{
+  content: '';
+  display: table;
+}
+
+.clearfix:after{
+  clear: both;
+}
+
+.clearfix{
+  *zoom: 1;
+}
+
+.container{
+  min-width: 300px;
+  max-width: 600px;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+}
+
+.container nav li{
+  float: left;
+  width: 33.3%;
+  height: 30px;
+  padding-top:5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.container nav li:last-child{
+  width: 33.4%;
+  border-right: none;
+}
+
+.container nav li:hover{
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.container .content li{
+  display: none;
+  height: 200px;
+  font-size: 50px;
+  color: #fff;
+}
+.container .content .active{
+  display: block;
+}
+
+.container .cont-1{
+  background-color: pink;
+}
+
+.container .cont-2{
+  background-color: blue;
+}
+
+.container .cont-3{
+  background-color: green;
+}
+
+
