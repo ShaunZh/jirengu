@@ -1,0 +1,117 @@
+/*
+* @Author: Marte
+* @Date:   2017-06-16 21:37:56
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-06-16 21:42:19
+*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.fade-active{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  opacity: .5;
+  background-color: #ccc;
+}
+
+@font-face {
+  font-family: 'iconfont';  /* project id 318510 */
+  src: url('//at.alicdn.com/t/font_yrsge9ot9vbo6r.eot');
+  src: url('//at.alicdn.com/t/font_yrsge9ot9vbo6r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_yrsge9ot9vbo6r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_yrsge9ot9vbo6r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_yrsge9ot9vbo6r.svg#iconfont') format('svg');
+}
+
+.icon{
+  font-family: 'iconfont';
+}
+.click-me{
+  position: absolute;
+  margin-right: 20px;
+  padding: 2px 20px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  background-color: #f9fb98;
+}
+
+.click-me:hover{
+  background-color: blue;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  min-width: 400px;
+  background-color: #fff;
+}
+
+
+.modal {
+  display: none;
+  border: 1px solid #f0f0f0;
+  box-shadow: 2px 2px 5px #f0f0f0;
+}
+.modal > h3{
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+.close-icon:after{
+  content: '\e60b';
+  position: absolute;
+  top: 25%;
+  right: 5px;
+  font-size: 20px;
+}
+.close-icon:hover{
+  cursor: pointer;
+}
+
+.modal .content{
+  padding: 20px 5px;
+  border-bottom: 1px solid #ccc;
+}
+.modal .content>p{
+  line-height: 35px;
+}
+
+.modal .btn-group{
+  padding: 5px 0;
+
+  text-align: center;
+}
+
+.modal .btn-group>button{
+  margin-right: 20px;
+  padding: 2px 20px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  background-color: #EBF4FF;
+  word-spacing: 2em;
+}
+
+
+.modal .btn-group>button:hover{
+  background-color: blue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal-active{
+  display: block;
+}
+
+
+
