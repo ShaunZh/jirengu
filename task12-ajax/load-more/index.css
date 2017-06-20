@@ -1,0 +1,89 @@
+/*
+* @Author: Marte
+* @Date:   2017-06-20 09:27:36
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-06-20 16:41:52
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul li{
+    list-style: none;
+}
+
+.loade-more-container {
+    width: 150px;
+    height: 40px;
+    margin: 10px auto;
+    position: relative;
+}
+
+
+.item-container>li {
+    margin: 10px;
+    border: 1px solid ;
+    padding: 5px;
+}
+
+
+.item-container>li:hover{
+    background-color: #4FE41A;
+
+}
+.load-more-btn {
+
+    padding: 10px; 0;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    background-color: #56F54C;
+}
+
+
+.load-more-btn:hover {
+    cursor: pointer;
+}
+
+
+.no-data-load{
+    position: absolute;
+    top: -70%;
+    opacity: 0;
+    font-size: 18px;
+    color: #6F6B6B;
+}
+
+.unfade{
+    opacity: 1;
+    -webkit-transition: opacity .4s linear;
+       -moz-transition: opacity .4s linear;
+        -ms-transition: opacity .4s linear;
+         -o-transition: opacity .4s linear;
+            transition: opacity .4s linear;
+}
+.fade{
+    opacity: 0;
+    -webkit-transition: opacity .3s linear;
+       -moz-transition: opacity .3s linear;
+        -ms-transition: opacity .3s linear;
+         -o-transition: opacity .3s linear;
+            transition: opacity .3s linear;
+}
+
+.loading-word{
+    opacity: 0;
+}
+
+.loading{
+    background: rgba(255, 255, 255, .8) url('https://i.stack.imgur.com/FhHRx.gif') center center no-repeat;
+}
+
+
+
+
+
+
