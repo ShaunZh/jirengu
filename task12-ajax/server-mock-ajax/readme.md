@@ -1,0 +1,3 @@
+这是一个使用mockserver构建web服务器，通过form提交数据的例子
+router.js是服务器端代码
+user.ejs是模板代码（html）
