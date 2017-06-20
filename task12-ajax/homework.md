@@ -11,3 +11,4 @@ ajax是指使用js通过异步的方式向服务发送请求获取数据，并�
 可以设置一个变量isResponse, 在发送前判断其是否已经“响应”（isResponse = true），如果响应了则进入ajax发送请求，并将其设置为“未收到响应”（isResponse = false），当接收到了后端数据，再将设置为“已经响应”（isResponse = true），这样当重复点击时，因为还未收到后端数据，不会进入ajax请求
 
 4. 实现加载更多的功能，效果范例258，后端在本地使用server-mock来模拟数据
+项目完整代码：[task12-ajax](https://github.com/ShaunZh/jirengu/tree/master/task12-ajax/load-more)
