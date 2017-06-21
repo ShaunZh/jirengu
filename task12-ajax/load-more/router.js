@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-06-20 09:27:10
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-06-20 18:51:54
+* @Last Modified time: 2017-06-21 16:07:51
 */
 
 router.get('/loadmore', function(req, res){
@@ -23,6 +23,7 @@ router.get('/loadmore', function(req, res){
         // 数据格式错误
         response["status"] = 402;
     }
+    // res.header("Access-Control-Allow-Origin", "*")
     setTimeout(function(){
     	res.send(response);
     }, 1000);

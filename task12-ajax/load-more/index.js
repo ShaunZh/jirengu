@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-06-20 09:27:19
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-06-20 18:52:42
+* @Last Modified time: 2017-06-21 16:07:34
 */
 
 'use strict';
@@ -14,8 +14,8 @@ var loadWord = document.querySelector('.load-word');
 
 
 var loadMore = {
-  "method": "post",
-  "url": "/loadMore",
+  "method": "get",
+  "url": "http://localhost:8080/loadMore",
   "dataType": "json",
   "data": {
     "index": 0,
@@ -135,7 +135,7 @@ function noDataDeal() {
 }
 
 function errorDeal() {
-  window.location.href = "404.html";
+  // window.location.href = "404.html";
 }
 
 function loading(){

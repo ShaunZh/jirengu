@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>news</title>
+<style>
+  .container{
+    width: 900px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <ul class="news">
+      <li>第11日前瞻：中国冲击4金 博尔特再战</li>
+      <li>男双力争会师决赛 </li>
+      <li>女排将死磕巴西！</li>
+    </ul>
+    <button class="change">换一组</button>
+  </div>
+
+<script>
+  document.querySelector('.change').addEventListener('click', function(e){
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://127.0.0.1:8080/getNews', true);
+    xhr.send();
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          var news = JSON.parse(xhr.responseText);
+          console.log(news);
+          var fragment = document.createDocumentFragment();
+
+          var html = '';
+          news.forEach(function(val){
+            html += '<li>' + val + '</li>';
+          });
+          document.querySelector('.news').innerHTML = html;
+        }
+      }
+    };
+  }, false);
+
+
+</script>
+</body>
+</html>
