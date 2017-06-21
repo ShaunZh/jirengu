@@ -1,21 +1,21 @@
-1. 什么是同源策略
+### 什么是同源策略
 **浏览器**出于安全考虑，只允许**本域**下的接口交互；**不同源**的客户端脚本，在**没有明确授权**的前提下，**不允许**读写对方资源
 **注意**：是浏览器会阻止跨域访问，并不是服务器端不响应请求
 
-## 本域指的是？
+**本域指的是？**
 - **同协议**：如都是http或https
 - **同域名**：如都是http://smallmage.com/a和http://smallmage.com/b
 - **同端口**：如都是80端口
 
-2. 什么是跨域？跨域有几种实现形式
+### 什么是跨域？跨域有几种实现形式
 跨域就是指不同域的接口相互访问
 实现方法：
-- **jsonp**
+#### 1. **jsonp**
   原理：利用script标签的开发策略（也就是不受同源策略的限制），网页可以得到从其他来源动态产生的json数据，而这种使用模式就是jsonp；利用jsonp抓取的并不是json数据，而是JavaScript，用JavaScript解释器运行
-- **CORS**
+#### 2. **CORS**
   cross-origin resource sharing（跨域资源共享）
   原理：前端用XMLHttpRequest发送请求进行跨域访问时，浏览器检测到是跨域，会在请求头里添加“origin”，后端回复数据时添加头信息：`"Access-Control-Allow-Origin"`，浏览器检测接收的信息中是否包含`"Access-Control-Allow-Origin"`，有则处理响应，没有则抛出XMLHttpRequest异常；
-- **降域**
+#### 3. **降域**
 当两个页面都使用同一个基础域名，并且使用相同的协议、端口，可以使用降域来实现跨域访问
 如：
 ```
@@ -24,7 +24,7 @@
 设置它们两个页面的：window.domain = "smallmage.com"
 ```
 这样两个网页就可以通信了
-- **使用HTML5的postmessage**（适用于两个iframe或两个页面之间）
+#### 4. **使用HTML5的postmessage**（适用于两个iframe或两个页面之间）
   - window.postMessage方法是HTML5引进的新特性
   - 可以使用它向其他页面发送数据，无论是否同源
 
@@ -44,7 +44,7 @@ window.addEventListener('message',function(e) {
 });
 ```
 
-5.  根据视频里的讲解演示三种以上跨域的解决方式 ，写成博客方式
+##  三种方式实现跨域访问
 - 使用jsonp
 ```js 
 <script>
