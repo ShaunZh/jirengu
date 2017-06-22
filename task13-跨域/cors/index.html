@@ -38,6 +38,8 @@
             html += '<li>' + val + '</li>';
           });
           document.querySelector('.news').innerHTML = html;
+        } else{
+          alert('失败: ' + xhr.status);
         }
       }
     };

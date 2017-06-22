@@ -12,9 +12,34 @@
 实现方法：
 #### 1. **jsonp**
   原理：利用script标签的开发策略（也就是不受同源策略的限制），网页可以得到从其他来源动态产生的json数据，而这种使用模式就是jsonp；利用jsonp抓取的并不是json数据，而是JavaScript，用JavaScript解释器运行
+  
 #### 2. **CORS**
   cross-origin resource sharing（跨域资源共享）
-  原理：前端用XMLHttpRequest发送请求进行跨域访问时，浏览器检测到是跨域，会在请求头里添加“origin”，后端回复数据时添加头信息：`"Access-Control-Allow-Origin"`，浏览器检测接收的信息中是否包含`"Access-Control-Allow-Origin"`，有则处理响应，没有则抛出XMLHttpRequest异常；
+  CORS请求分为两种：**简单请求**和**非简单请求**
+  凡是满足一下条件的就是简单请求：
+>**请求方法是以下三个请求之一：**
+- HEAD
+- GET
+- POST
+
+>**HTTP的头信息不超出以下几种字段：**
+- Accept
+- Accept-Language
+- Content-Language
+- Last-Event-ID
+- Content-Type只限于这三个值：`application/x-www-form-urlencoded、multipart/form-data、text/plain`
+
+凡是不同时满足上面两个请求的，都属于非简单请求
+
+- 简单请求
+  对于简单请求，浏览器发出CORS请求，会在请求头中添加origin字段，origin字段用来说明该请求来自哪个源（协议+域名+端口），服务器根据这些信息来决定是否响应请求；如果指定的源不在服务器的许可范围之内，服务器会返回一个正常的HTTP响应，浏览器接到响应后，发现头信息里没有包含"Access-Control-Allow-Origin"字段，就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。
+  注意： 这种错误不能通过状态吗识别，因为浏览器的状态码很可能返回的是200
+- 非简单请求
+  非简单请求只哪些对服务器有特殊要求的请求，比如请求方法是`PUT`或`DELETE`，或者Content-Type字段的类型是`application/json`。
+  非简单请求在正式通信之前会**增加一次HTTP查询请求**，被称为**预检**请求；浏览器会先询问服务器当前网页的域名是否在许可范围之内，以及可以使用的方法和头信息字段，只有得到肯定的答复，浏览器才会发出正式的XMLHttpRequest，否则就报错
+
+  博客：[跨域资源共享（CORS）](http://www.jianshu.com/p/cc9d26c6b444)
+
 #### 3. **降域**
 当两个页面都使用同一个基础域名，并且使用相同的协议、端口，可以使用降域来实现跨域访问
 如：
@@ -24,6 +49,7 @@
 设置它们两个页面的：window.domain = "smallmage.com"
 ```
 这样两个网页就可以通信了
+
 #### 4. **使用HTML5的postmessage**（适用于两个iframe或两个页面之间）
   - window.postMessage方法是HTML5引进的新特性
   - 可以使用它向其他页面发送数据，无论是否同源
