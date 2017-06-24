@@ -29,5 +29,6 @@ app.get('/getNews', function(req, res){
     }
     res.header("Access-Control-Allow-Origin", "*");
     res.send(JSON.stringify(data));
-})}
+})
+}
  module.exports.setRouter = setRouter

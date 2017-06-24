@@ -12,7 +12,7 @@
 实现方法：
 #### 1. **jsonp**
   原理：利用script标签的开发策略（也就是不受同源策略的限制），网页可以得到从其他来源动态产生的json数据，而这种使用模式就是jsonp；利用jsonp抓取的并不是json数据，而是JavaScript，用JavaScript解释器运行
-  
+
 #### 2. **CORS**
   cross-origin resource sharing（跨域资源共享）
   CORS请求分为两种：**简单请求**和**非简单请求**
@@ -119,7 +119,6 @@ document.querySelector('.change').addEventListener('click', function(e){
 ```
 服务器端
 ```js 
-
 app.get('/getNews', function(req, res){
 
     var news = [
