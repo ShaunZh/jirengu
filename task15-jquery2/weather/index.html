@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/bulma.css">
+  <link rel="stylesheet" type="text/css" href="lib/weather-icons/css/weather-icons.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/weather-icons/css/weather-icons-wind.min.css">
+
+  <link rel="stylesheet" type="text/css" href="style/common.css">
+  <link rel="stylesheet" type="text/css" href="style/index.css">
+
+
+  <title>weather</title>
+</head>
+<body>
+
+<!--     <img class="content__bg" src="img/sea.jpg" alt="">
+ -->
+  <div class="container">
+    <section class="main-content ">
+      <div class="common clearfix">
+        <div class="content__info float-right">
+          <p class="content__info--icon"><span class="base-icon base-icon-location"></span></p>
+          <p class="content__info--location">广州 中国</p>
+          <p class="content__info--update-time"></p>
+          <p class="content__info--update"><button class="button is-primary  is-large">更新</button></p>
+        </div>
+      </div>
+    </section>
+    <section class="sub-content">
+      <ul class="sub-content__item-Wrap columns">
+        <li class="sub-content__item sub-content__item--0 sub-content__cur column is-6 ">
+          <div class="sub-content__item--left">
+            <p class="weather-temp-cur"></p>
+            <p class="weather-temp"></p>
+            <p><span class="day"></span> <span class="date"></span></p>
+
+          </div>
+
+          <div class="sub-content__item--right">
+            <p class="weather-icon"><img src="" alt="" class="weather-picture"></p>
+            <!-- <p class="weather-icon"><span class="wi wi-day-sunny"></span></p> -->
+            <p class="state"></p>
+          </div>
+        </li>
+
+        <li class="sub-content__item sub-content__item--1 column is-2 ">
+          <p class="day"></p>
+          <p class="date"></p>
+          <p class="state"></p>
+          <!-- <p class="weather-icon"><i class="wi wi-day-sunny"><img src="" alt="" class="weather-"></i></p> -->
+          <p class="weather-icon"><img src="" alt="" class="weather-picture"></p>
+          <p class="weather-temp"></p>
+        </li>
+        <li class="sub-content__item sub-content__item--2 column is-2">
+          <p class="day"></p>
+          <p class="date"></p>
+          <p class="state"></p>
+          <p class="weather-icon"><img src="" alt="" class="weather-picture"></p>
+          <!-- <p class="weather-icon"><i class="wi wi-day-sunny"></i></p> -->
+          <p class="weather-temp"></p>
+        </li>
+        <li class="sub-content__item sub-content__item--3 column is-2">
+          <p class="day"></p>
+          <p class="date"></p>
+          <p class="state"></p>
+          <p class="weather-icon"><img src="" alt="" class="weather-picture"></p>
+          <!-- <p class="weather-icon"><i class="wi wi-day-sunny"></i></p> -->
+          <p class="weather-temp"></p>
+        </li>
+        <!-- <li class="sub-content__item column sub-content__item--4 is-2">
+          <p class="day">今天</p>
+          <p class="date">6/28</p>
+          <p class="state">雷阵雨</p>
+          <p class="weather-icon"><i class="wi wi-day-sunny"></i></p>
+          <p class="weather-temp">40℃</p>
+        </li> -->
+      </ul>
+    </section>
+  </div>
+
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="script/getCityId.js"></script>
+  <script src="script/index.js"></script>
+</body>
+</html>

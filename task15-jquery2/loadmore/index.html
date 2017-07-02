@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+
+    <title>ajax实践——loadmore</title>
+    <style type="text/css" media="screen">
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      ul li{
+        list-style: none;
+      }
+      .loade-more-container {
+        width: 150px;
+        height: 40px;
+        margin: 10px auto;
+        position: relative;
+      }
+      .item-container>li {
+        margin: 10px;
+        border: 1px solid ;
+        padding: 5px;
+      }
+      .item-container>li:hover{
+        background-color: #4FE41A;
+      }
+      .load-more-btn {
+        padding: 10px; 0;
+        border-radius: 4px;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        color: #fff;
+        background-color: #56F54C;
+      }
+      .load-more-btn:hover {
+        cursor: pointer;
+      }
+      .no-data-load{
+        position: absolute;
+        top: -70%;
+        opacity: 0;
+        font-size: 18px;
+        color: #6F6B6B;
+      }
+      .unfade{
+        opacity: 1;
+        -webkit-transition: opacity .4s linear;
+           -moz-transition: opacity .4s linear;
+            -ms-transition: opacity .4s linear;
+             -o-transition: opacity .4s linear;
+                transition: opacity .4s linear;
+      }
+      .fade{
+        opacity: 0;
+        -webkit-transition: opacity .3s linear;
+           -moz-transition: opacity .3s linear;
+            -ms-transition: opacity .3s linear;
+             -o-transition: opacity .3s linear;
+                transition: opacity .3s linear;
+      }
+      .loading-word{
+        opacity: 0;
+      }
+      .loading{
+        background: rgba(255, 255, 255, .8) url('https://i.stack.imgur.com/FhHRx.gif') center center no-repeat;
+      }
+    </style>
+</head>
+<body>
+    <ul class="item-container"></ul>
+    <div class="loade-more-container">
+        <span class="no-data-load">到底了、大兄弟</span>
+        <button class="load-more-btn "><span class="load-word">加载更多</span></button>
+    </div>
+    <script>
+      var loadMoreBtn = $('.load-more-btn').eq(0);
+      var itemContainer = $('.item-container').eq(0);
+      var noDataLoad = $('.no-data-load').eq(0);
+      var loadWord = $('.load-word').eq(0);
+
+      var sendData = {
+        url: "/loadmore",
+        type: "get",
+        data: {
+          index: 0,
+          length: 5
+        }
+      };
+      loadMoreBtn.on('click', function(e){
+        e.preventDefault();
+        loading();
+        var xhr = $.ajax({
+          url: sendData["url"],
+          type: sendData["type"],
+          data: sendData["data"]
+        });
+        xhr.done(function(data){
+          dealData(data);
+        });
+        xhr.fail(function(data){
+          alert('通信异常');
+        });
+        xhr.always(function(){
+          loadComplete();
+        });
+      });
+
+      function dealData(d) {
+        var status = d["status"];
+        if (status === 200) {           // 返回正确数据
+          render(d['data']);
+          sendData["data"]["index"]++;
+        } else if (status === 401) {     // 没有数据了
+          noDataDeal();
+        } else if (status === 402) {
+          alert('发送的数据错误');
+        }
+      }
+
+      function render(d) {
+        var fragment = document.createDocumentFragment();
+        d.forEach(function(val) {
+          itemContainer.append(`<li>${val}</li>`);
+        });
+
+      }
+
+      function noDataDeal() {
+        noDataLoad.addClass('unfade');
+        setTimeout(function(){
+          noDataLoad.removeClass("unfade");
+          noDataLoad.addClass("fade");
+          setTimeout(function(){
+            noDataLoad.removeClass("fade");
+          }, 300);
+        }, 800);
+      }
+
+      function loading(){
+        loadMoreBtn.addClass("loading");
+        loadWord.addClass('loading-word');
+      }
+
+      function loadComplete(){
+        loadMoreBtn.removeClass("loading");
+        loadWord.removeClass('loading-word');
+      }
+    </script>
+</body>
+</html>

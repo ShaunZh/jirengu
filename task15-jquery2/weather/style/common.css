@@ -1,0 +1,28 @@
+/*
+* @Author: Marte
+* @Date:   2017-06-28 12:52:26
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-06-28 13:01:12
+*/
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
+
+.clearfix:after,
+.clearfix:before{
+  content: "";
+  display: table;
+}
+
+.clearfix:after{
+  clear: both;
+}
+
+.clearfix{
+  *zoom: 1;
+}
+

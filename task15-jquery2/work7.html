@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+
+  <meta charset="utf-8">
+  <title>work7</title>
+  <style type="text/css" media="screen">
+    body{
+      background: pink;
+    }
+    .part{
+      height: 200px;
+      max-width: 400px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid grey;
+    }
+    .btn{
+      width: 200px;
+      height: 100px;
+      font-size: 20px;
+      background: yellow;
+      vertical-align: middle;
+    }
+    .scroll{
+      position: fixed;
+      left: 50%;
+      top: 0;
+      border: 0;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .scroll .dist{
+      color: red;
+    }
+    .trans-color{
+      box-shadow: 2px 5px 5px grey;
+    }
+    .input:focus {
+        outline: none !important;
+        border:1px solid blue;
+        box-shadow: 0 0 10px #719ECE;
+    }
+  </style>
+</head>
+<body>
+  <!-- 用jQuery实现以下操作
+    1. 当点击$btn 时，让 $btn 的背景色变为红色再变为蓝色
+    2. 当窗口滚动时，获取垂直滚动距离
+    3. 当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色
+    4. 当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字
+    5. 当选择 select 后，获取用户选择的内容 -->
+
+  <div id="container">
+    <!-- 1. 当点击$btn 时，让 $btn 的背景色变为红色再变为蓝色 -->
+    <div class="part click-me">
+      <button class="btn">点我变色</button>
+    </div>
+    <!-- 2. 当窗口滚动时，获取垂直滚动距离 -->
+    <div class="part scroll">
+      <p>滚动的垂直距离为: <span class="dist"></span></p>
+    </div>
+    <!-- 3. 当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色 -->
+    <div class="part trans-color">
+      鼠标移入会变色哟
+    </div>
+    <!-- 4. 当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字 -->
+    <div class="part input-wrap">
+      <input type="text" class="input" val="">
+      <p class="output-content"></p>
+    </div>
+    <!-- 5. 当选择 select 后，获取用户选择的内容 -->
+    <div class="part select-wrap">
+      <select name="sel" id="sel">
+        <option value="NO.1">第一</option>
+        <option value="NO.2">第二</option>
+      </select>
+      <p class="sel-content"></p>
+    </div>
+  </div>
+
+  <script>
+    // 1. 当点击$btn 时，让 $btn 的背景色变为红色再变为蓝色
+    $(".btn").on("click", function(){
+      $(this).animate({
+        "backgroundColor": "blue",
+        "color": "#fff"
+      }, 1000).animate({
+        "backgroundColor": "red",
+        "color": "blue"
+      }, 1000);
+    });
+
+    // 2. 当窗口滚动时，获取垂直滚动距离
+    $(window).scroll(function() {
+      $(".scroll .dist").text(parseInt($(this).scrollTop()));
+    });
+
+    // 3. 当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色
+    $(".trans-color").on("mouseenter", function(){
+      $(this).css({"background-color": "red"});
+    });
+
+    $(".trans-color").on("mouseleave", function(){
+      $(this).css({"background-color": "pink"});
+    });
+    // 4. 当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字
+    $(".input").on("input", function(){
+      $(this).val($(this).val().toUpperCase());
+    });
+
+    $(".input-wrap .input").on("change", function(){
+      $(".input-wrap .output-content").text(`输入的内容为: ${$(this).val()}`);
+      console.log($(this).val());
+    });
+    // 5. 当选择 select 后，获取用户选择的内容
+    $("#sel").change(function(){
+      var content = `选择的val = ${$(this).val()}, text = ${$(this).find("option:selected").text()}` ;
+      $(".sel-content").text(content);
+    });
+  </script>
+</body>
+</html>
