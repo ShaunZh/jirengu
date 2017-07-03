@@ -1,16 +1,21 @@
 1. jQuery 中， $(document).ready()是什么意思？
   表示加载完成HTML（构建完DOM树）时，执行该函数
+
 2. $node.html()和$node.text()的区别?
   html()方法是在node下添加子元素，node原来的子元素会被新元素替换
   text()方法是修改node的文本节点内容
+
 3. $.extend 的作用和用法? 
   - 当提供两个或多个对象给extend时，对象的所有属性会被添加到目标对象上
   - 当只有一个参数提供时，意味着目标参数被省略，jquery对象本身被认为是目标对象，这样，我们就可以在jquery的命名空间下添加新的功能；有利于插件开发者向jquery添加新函数
+
 4. jQuery 的链式调用是什么？
   在jquery中，每一步的操作，返回的都是一个jquery对象，所以不同的操作可以连接在一起，如：`　$('div').find('h3').eq(2).html('Hello');`
+
 5. jQuery 中 data 函数的作用
   - 可以在匹配元素上存储任意类型的数据
   - 可以用data函数访问自定义属性的值
+
 6. 写出以下功能对应的 jQuery 方法：
   - 给元素 $node 添加 class active，给元素 $noed 删除 class active
     `$node.addClass("active")`——添加
@@ -60,38 +65,170 @@
     $node.length
   - 获取当前元素在兄弟中的排行
     $node.index()
+
 7. 用jQuery实现以下操作
   http://js.jirengu.com/gokid
-  - 当点击$btn 时，让 $btn 的背景色变为红色再变为蓝色
-    对于背景颜色的改变需要添加jquery ui或者jquery color library，这里使用jquery ui
-    ```html
-    <head>
-    <link href="//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <script src="//code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-      <meta charset="utf-8">
-      <title>JS Bin</title>
-    </head>
-    <body>
-      <button class="btn">我是一个按钮</button>
-      <script>
-        $(".btn").on("click", function(){
-        $(this).animate({
-          "backgroundColor": "blue"
-        }, 1000).animate({
-          "backgroundColor": "red"
-        }, 1000);
-      });
-      </script>
-    </body>
-    
-    ```
 
-  - 当窗口滚动时，获取垂直滚动距离
-    ```
-    
-    ```
-  - 当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色
-  - 当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字
-    
-  - 当选择 select 后，获取用户选择的内容
+8. loadmore加载更多
+  ```html 
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset='utf-8'>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+
+    <title>ajax实践——loadmore</title>
+    <style type="text/css" media="screen">
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      ul li{
+        list-style: none;
+      }
+      .loade-more-container {
+        width: 150px;
+        height: 40px;
+        margin: 10px auto;
+        position: relative;
+      }
+      .item-container>li {
+        margin: 10px;
+        border: 1px solid ;
+        padding: 5px;
+      }
+      .item-container>li:hover{
+        background-color: #4FE41A;
+      }
+      .load-more-btn {
+        padding: 10px; 0;
+        border-radius: 4px;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        color: #fff;
+        background-color: #56F54C;
+      }
+      .load-more-btn:hover {
+        cursor: pointer;
+      }
+      .no-data-load{
+        position: absolute;
+        top: -70%;
+        opacity: 0;
+        font-size: 18px;
+        color: #6F6B6B;
+      }
+      .unfade{
+        opacity: 1;
+        -webkit-transition: opacity .4s linear;
+           -moz-transition: opacity .4s linear;
+            -ms-transition: opacity .4s linear;
+             -o-transition: opacity .4s linear;
+                transition: opacity .4s linear;
+      }
+      .fade{
+        opacity: 0;
+        -webkit-transition: opacity .3s linear;
+           -moz-transition: opacity .3s linear;
+            -ms-transition: opacity .3s linear;
+             -o-transition: opacity .3s linear;
+                transition: opacity .3s linear;
+      }
+      .loading-word{
+        opacity: 0;
+      }
+      .loading{
+        background: rgba(255, 255, 255, .8) url('https://i.stack.imgur.com/FhHRx.gif') center center no-repeat;
+      }
+    </style>
+</head>
+<body>
+    <ul class="item-container"></ul>
+    <div class="loade-more-container">
+        <span class="no-data-load">到底了、大兄弟</span>
+        <button class="load-more-btn "><span class="load-word">加载更多</span></button>
+    </div>
+    <script>
+      var loadMoreBtn = $('.load-more-btn').eq(0);
+      var itemContainer = $('.item-container').eq(0);
+      var noDataLoad = $('.no-data-load').eq(0);
+      var loadWord = $('.load-word').eq(0);
+
+      var sendData = {
+        url: "/loadmore",
+        type: "get",
+        data: {
+          index: 0,
+          length: 5
+        }
+      };
+      loadMoreBtn.on('click', function(e){
+        e.preventDefault();
+        loading();
+        var xhr = $.ajax({
+          url: sendData["url"],
+          type: sendData["type"],
+          data: sendData["data"]
+        });
+        xhr.done(function(data){
+          dealData(data);
+        });
+        xhr.fail(function(data){
+          alert('通信异常');
+        });
+        xhr.always(function(){
+          loadComplete();
+        });
+      });
+
+      function dealData(d) {
+        var status = d["status"];
+        if (status === 200) {           // 返回正确数据
+          render(d['data']);
+          sendData["data"]["index"]++;
+        } else if (status === 401) {     // 没有数据了
+          noDataDeal();
+        } else if (status === 402) {
+          alert('发送的数据错误');
+        }
+      }
+
+      function render(d) {
+        var fragment = document.createDocumentFragment();
+        d.forEach(function(val) {
+          itemContainer.append(`<li>${val}</li>`);
+        });
+
+      }
+
+      function noDataDeal() {
+        noDataLoad.addClass('unfade');
+        setTimeout(function(){
+          noDataLoad.removeClass("unfade");
+          noDataLoad.addClass("fade");
+          setTimeout(function(){
+            noDataLoad.removeClass("fade");
+          }, 300);
+        }, 800);
+      }
+
+      function loading(){
+        loadMoreBtn.addClass("loading");
+        loadWord.addClass('loading-word');
+      }
+
+      function loadComplete(){
+        loadMoreBtn.removeClass("loading");
+        loadWord.removeClass('loading-word');
+      }
+    </script>
+</body>
+</html>
+  ```
+9. 天气
+  http://js.jirengu.com/kuqen

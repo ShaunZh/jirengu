@@ -2,9 +2,8 @@
 * @Author: Marte
 * @Date:   2017-06-27 14:31:55
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-07-02 22:34:17
+* @Last Modified time: 2017-07-03 20:30:41
 */
-
 @font-face {
   font-family: 'baseicon';  /* project id 338445 */
   src: url('https://at.alicdn.com/t/font_vbxs7h1wa5eqxgvi.eot');
@@ -18,6 +17,7 @@
   max-width: 960px;
   margin: 0 auto;
 }
+
 .base-icon{
   font-family: "baseicon";
 }
@@ -54,11 +54,11 @@
   border-bottom-left-radius: 10px;
 }
 
-
 .sub-content{
   color: #fff;
-  background-color: #ae9f91;
+  background: rgba(152, 169, 175, .8);
 }
+
 .sub-content__item{
   padding: 20px;
   border-right: 1px solid #B8AFAF;
@@ -72,6 +72,7 @@
 .sub-content__item:last-child{
   border-right: 0;
 }
+
 .sub-content__cur .sub-content__item--left,
 .sub-content__cur .sub-content__item--right
 {
