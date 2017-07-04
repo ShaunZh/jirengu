@@ -85,4 +85,5 @@
 
 5. 实现视频中的图片懒加载效果
     [代码演示](http://js.jirengu.com/xufad)
-6. 
+6. 实现新闻懒加载
+    [代码](https://github.com/ShaunZh/jirengu/blob/master/task16-%E6%87%92%E5%8A%A0%E8%BD%BD/%E6%87%92%E5%8A%A0%E8%BD%BD%E6%96%B0%E9%97%BB/index.html)
