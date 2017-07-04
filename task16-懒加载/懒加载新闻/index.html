@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <title>新闻自动懒加载</title>
+  <style>
+    html,body,h2,p,ul,li{
+      margin: 0;
+      padding: 0;
+    }
+    a{
+      color: #333;
+      text-decoration: none;
+    }
+
+    li{
+      list-style: none;
+    }
+
+    .container{
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .item{
+      margin-top: 20px;
+    }
+    .item:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .item .thumb img{
+      width: 50px;
+      height: 50px;
+    }
+    .item .thumb {
+      float: left;
+    }
+    .item h2{
+      margin-left: 60px;
+      font-size: 14px;
+
+    }
+    .item p{
+      margin-left: 60px;
+      font-size: 14px;
+      margin-top: 10px;
+      color: #ccc;
+    }
+    .load-more{
+      visibility: hidden;
+      margin: 3px;
+      height: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <ul class="news">
+    </ul>
+    <p class="load-more"></p>
+  </div>
+
+  <script>
+
+  var pageIndex = 0;
+  var len = 3;
+  var isNewArrive = true;
+  var isOver = false;
+
+  getData(pageIndex + '', len);
+  $(window).on('scroll', function(){
+    checkLoad();
+  });
+
+  function isVisible($node){
+    var windowHeight = $(window).height();
+    var scrollTop = $(window).scrollTop();
+    var offsetTop = $node.offset().top;
+    var nodeHeight = $node.height();
+    if ((offsetTop + nodeHeight > scrollTop) && (offsetTop < (windowHeight + scrollTop))) {
+      return true;
+    }
+    return false;
+  }
+
+  function checkLoad(){
+    var $loadMore = $('.load-more');
+    if (isVisible($loadMore) && !isOver && isNewArrive){
+      getData(pageIndex + '', len);
+      pageIndex++;
+    }
+  }
+
+  function getData(page, len){
+    isNewArrive = false;
+    var xhr = $.ajax({
+      url: '/getNews',
+      type: 'get',
+      data: {
+        page: page
+      }
+    }).done(function(news){
+      isNewArrive = true;
+      loadData(news['data']);
+      checkLoad();
+    }).fail(function(){
+      alert('获取数据出错');
+    })
+  }
+
+  function loadData(news){
+    if (news.length === 0) {
+      // 没有数据了
+      $('.container').append('<p class="no-data">没有数据了</p>');
+      isOver = true;
+      return ;
+    }
+    var htmls = '';
+    $.each(news, function(){
+      htmls += '<li class="item">';
+      htmls += '<a href="' + this.link + '">';
+      htmls += '<div class="thumb"> <img src="' + this.img + '"></div>';
+      htmls += '<h2>'+this.title+'</h2>';
+      htmls += '<p>'+this.brif+'</p>';
+      htmls += '</a></li>';
+    });
+    $(htmls).appendTo($('.news'));
+  }
+  </script>
+</body>
+</html>
