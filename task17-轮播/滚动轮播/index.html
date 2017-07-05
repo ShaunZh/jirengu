@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+
+  <title>轮播图</title>
+  <style type="text/css" media="screen">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li{
+      list-style: none;
+    }
+
+    a{
+      color: #444;
+      text-decoration: none;
+    }
+
+    .carousel{
+      position: relative;
+      width: 320px;
+      height: 240px;
+      margin: 10px auto;
+      border: 1px solid #DEDEDE;
+      overflow: hidden;
+    }
+
+    .carousel__img-wrap{
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .carousel__img-wrap>li{
+      float: left;
+      height: 240px;
+    }
+
+    .carousel__img-wrap img{
+      width: 320px;
+      height: 240px;
+    }
+
+    .carousel--icon{
+      position: absolute;
+      top: 50%;
+      margin-top: -10px;
+
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      z-index: 10;
+      font-size: 20px;
+      text-align: center;
+      line-height: 30px;
+
+      color: #fff;
+
+      background: rgba(88, 88, 88, .9);
+    }
+    .carousel--play-pre{
+      left: 20px;
+    }
+    .carousel--play-next{
+      right: 20px;
+    }
+
+    .carousel__display-index{
+      position: absolute;
+      z-index: 10;
+      bottom: 10px;
+      left: 72px;
+    }
+
+    .carousel__display-index>li{
+      float: left;
+      width: 30px;
+      height: 8px;
+      margin-left: 10px;
+      border: 1px solid #D5D0D0;
+      border-radius: 5px;
+    }
+
+    .carousel__display-index>li:hover{
+      cursor: pointer;
+    }
+
+    .carousel__display-index .active{
+      background-color: #D5D0D0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="carousel">
+    <ul class="carousel__img-wrap">
+      <li><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt="" /></a></li>
+    </ul>
+
+
+    <a href="#" class="carousel--play-pre carousel--icon">&lt;</a>
+    <a href="#" class="carousel--play-next carousel--icon">&gt;</a>
+
+    <ul class="carousel__display-index">
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <script src="http://kejian.jirengu.com/static/js/jquery-1.11.1.min.js"></script>
+  <script>
+    var $imgs = $('.carousel__img-wrap li'),
+        imgWidth = $('.carousel__img-wrap img').eq(0).width(),
+        $imgWrap = $('.carousel__img-wrap').eq(0),
+        pageIndex = 0,
+        $next = $('.carousel--play-next'),
+        $pre = $('.carousel--play-pre'),
+        $index = $('.carousel__display-index li'),
+        isCompleteAnimate = true,
+        carouselIntervalId ;
+
+    $imgWrap.append($imgs.first().clone());
+    $imgWrap.prepend($imgs.last().clone());
+
+    $imgWrap.width(($imgs.length + 2) * imgWidth);
+    $imgWrap.css({left: -imgWidth});
+
+    $next.on('click', function(){
+      playNext(1);
+      clearInterval(carouselIntervalId);
+    });
+
+    $pre.on('click', function(){
+      playPre(1);
+      clearInterval(carouselIntervalId);
+    });
+
+
+    $index.on('click', function(){
+      var curClickIndex = $(this).index();
+      if (curClickIndex > pageIndex) {
+        playNext(curClickIndex - pageIndex);
+      } else if (curClickIndex < pageIndex) {
+        playPre(pageIndex - curClickIndex);
+      }
+    });
+
+    //自动播放
+    carouselIntervalId = setInterval(function(){
+        playNext(1);
+      }, 2000);
+
+
+    function dispIndex(index){
+      $index.removeClass('active').eq(index).addClass('active');
+    }
+
+    function playNext(len){
+      if (!isCompleteAnimate) {
+        return ;
+      }
+      isCompleteAnimate = false;
+      $imgWrap.animate({
+        left: '-=' + (imgWidth * len)},
+        500, function() {
+        /* stuff to do after animation is complete */
+        pageIndex += len;
+        if (pageIndex === ($imgs.length)) {
+          pageIndex = 0;
+          $imgWrap.css({left: -imgWidth});
+        }
+        dispIndex(pageIndex);
+        isCompleteAnimate = true;
+      });
+    }
+
+    function playPre(len){
+      if (!isCompleteAnimate) {
+        return ;
+      }
+      isCompleteAnimate = false;
+      $imgWrap.animate({
+        left: '+=' + (imgWidth * len)},
+        500, function() {
+        /* stuff to do after animation is complete */
+        pageIndex -= len;
+        if (pageIndex < 0) {
+          pageIndex = ($imgs.length-1);
+          $imgWrap.css({left: -(imgWidth * $imgs.length)});
+        }
+        dispIndex(pageIndex);
+        isCompleteAnimate = true;
+      });
+    }
+  </script>
+</body>
+</html>
