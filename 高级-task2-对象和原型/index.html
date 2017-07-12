@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>对象原型</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+  function Person(name, age){
+    this.name = name;
+    this.age = age;
+
+    this.hello = function(){
+      console.log('hello');
+    };
+  }
+
+
+
+
+  Person.prototype.sayName = function(){
+  console.log('name = ' + this.name);
+  };
+
+  Person.prototype.sayAge = function(){
+  console.log('age = ' + this.age);
+  };
+
+  var per = new Person('hha', 198)
+
+  function Student(name, age, sex){
+    // 以下两句都可以，这样只获取到了Person的属性，并未获取到方法
+  // Person.bind(this)(name,age);
+  // Person.call(this, name, age);
+  Person.apply(this, arguments);
+  this.sex = sex;
+  }
+
+  // 要想获得Person原型上的方法，只需要将Student.prototype.__proto__ = Person.prototype；
+  // 可以手动给Student.prototype.__proto__赋值，也可以使用Object.create创建（推荐使用）
+  // Object.create()创建一个拥有指定原型和若干属性的对象，并将其返回
+  // Student.prototype = Object.create(Person.prototype);
+  // Student.prototype.constructor = Student;
+  // // 方法2
+  // function fn(){}
+  // fn.prototype = Person.prototype;
+  // Student.prototype = new fn();
+
+  // Student.prototype.saySex = function(){
+  // console.log('sex = ' + this.sex);
+  // };
+
+
+  var $ = new Student('m1ei', 18, 'male');
+  // $.saySex();
+  // $.sayName();
+  console.log($);
+  $.hello();
+</script>
+</body>
+</html>

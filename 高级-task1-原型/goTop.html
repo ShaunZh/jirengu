@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>第6题 goTop</title>
+  <style type="text/css" media="screen">
+    [class*='box']{
+      text-align: center;
+      font-size: 30px;
+      color: red;
+    }
+    .box1 {
+      background-color: pink;
+    }
+
+    .box2{
+      background-color: blue;
+      position: relative;
+    }
+
+    .box2>button{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 5px 10px;
+      background-color: #fff;
+      color: #000;
+      font-size: 20px;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="box1">
+    box1
+  </div>
+  <div class="box2" id="box2">
+    box2
+  </div>
+
+  <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+
+  function GoTop(ct){
+    this.ct = ct;
+    this.target = $('<button></button>');
+    this.target.text('回到顶部');
+
+    GoTop.prototype.createNode = function(){
+      this.ct.append(this.target);
+    };
+
+    GoTop.prototype.bindEvent = function(){
+      this.target.on('click', function(){
+        $(window).scrollTop(0);
+      });
+    };
+
+    this.createNode();
+    this.bindEvent();
+  }
+
+  var ct = $(".box2");
+  var boxs = $('[class*="box"]');
+  $.each(boxs, function(index, val){
+    boxs.height($(window).innerHeight());
+  });
+
+  var goTop = new GoTop(ct);
+  </script>
+</body>
+</html>
