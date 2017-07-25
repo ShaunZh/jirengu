@@ -1,0 +1,23 @@
+{
+  "name": "hexon-weather-demo2",
+  "version": "1.0.3",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "hexonweather": "./index.js"
+  },
+  "scripts": {
+    "hexon": "echo hexon....",
+    "start": "echo start....",
+    "build": "echo build....",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2"
+  },
+  "devDependencies": {
+    "hexon-weather-demo2": "^1.0.1"
+  }
+}
