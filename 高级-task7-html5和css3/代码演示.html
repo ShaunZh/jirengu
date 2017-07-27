@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style type="text/css" media="screen">
+
+body,
+html{
+  height: 100%;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+body{
+  background: #0dcecb;
+}
+    .method {
+  width: 100px;
+  height: 100px;
+  background: red;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #CCC;
+}
+
+.wrap{
+  display: inline-block;
+  border: 1px solid #888;
+  margin-bottom: 10px;
+}
+.circle{
+
+  border-radius: 50%;
+
+}
+
+.circle-angle{
+  border-radius: 20px;
+}
+
+.shadow{
+  background: pink;
+  box-shadow: 0px 0px 10px blue;
+  color: #000;
+}
+
+
+.scale-enlarge{
+  margin-left: 200px;
+  transform: scale(2, 2);
+}
+
+.scale-shrink{
+  transform: scale(.8, .8);
+  font-size: 20px;
+}
+
+.scale-translate{
+  /* background-color: blue; */
+  transform: translate(100px, 10px);
+}
+
+.scale-skew{
+  transform: skew(30deg, 20deg);
+}
+
+.move-3d{
+  background-color: blue;
+  transform: translate3d(20px, 20px, 20px);
+}
+
+.skew-3d{
+  transform: rotateZ(30deg) rotateX(30deg) translateX( 100px );
+}
+
+
+.background {
+  margin: 50px;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+
+ background:linear-gradient(to right bottom, red, green);
+}
+
+
+.transition{
+  transition: all 1s ;
+}
+.transition:hover{
+  width: 200px;
+  height: 200px;
+  background: blue;
+}
+
+
+@keyframes rainbow{
+  0{background:  #c00;}
+  50%{background: orange;}
+  100%{background: yellowgreen;}
+
+}
+.animate:hover{
+  animation: 1s rainbow infinite;
+}
+
+
+
+
+.loading-wrap{
+  margin : 100px;
+  width: 300px;
+
+}
+
+
+
+.loading1{
+  position: relative;
+  width: 10px;
+  height: 40px;
+  display: inline-block;
+  background: #fff;
+  left: 20px;
+
+  animation: 1s loading1 infinite  ease-in-out;
+  animation-delay: .16s;
+}
+
+
+.loading1:before{
+  content: '';
+  position: absolute;
+  left: -15px;
+  width: 10px;
+  height: 40px;
+  display: inline-block;
+  background: #fff;
+  animation: 1s loading1 infinite  ease-in-out;
+}
+
+.loading1:after{
+  content: '';
+  position: absolute;
+  left: 15px;
+  width: 10px;
+  height: 40px;
+  display: inline-block;
+  background: #fff;
+  animation: 1s loading1 infinite  ease-in-out;
+  animation-delay: .32s;
+}
+
+@keyframes loading1{
+  0%, 80%, 100%{
+    height: 40px;
+    box-shadow: 0 0 #fff;
+  }
+  10%{
+    height: 50px;
+    box-shadow: 0 -10px #fff;
+  }
+}
+
+
+
+
+
+.loading-circle{
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  background: #0dcecb;
+  border-radius: 50%;
+  border: 10px solid #3dd8d5;
+  border-bottom: 10px solid #fff;
+  animation: 1s rotate linear infinite;
+}
+
+@keyframes rotate{
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(360deg);}
+}
+
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <div class="method circle"><span>圆</span></div>
+  <div class="method circle-angle"><span>圆角</span></div>
+  <div class="method shadow"><span>阴影</span></div>
+
+  <div class="method scale-enlarge"><span>2d-放大</span></div>
+  <div class="method scale-shrink"><span>2d-缩小</span></div>
+  <div class="method scale-translate"><span>2d-偏移</span></div>
+
+  <div class="wrap">
+    <div class="method scale-skew"><span>2d-旋转</span></div>
+  </div>
+
+  <div class="method move-3d"><span>3d-移动</span></div>
+
+
+  <div class="method skew-3d"><span>3d-旋转</span></div>
+
+<div class="background">
+  <span>背景色渐变</span>
+</div>
+
+<div class="method transition">
+  <span>鼠标悬停，查看过渡效果</span>
+</div>
+
+  <div class="method animate">
+    <span>鼠标悬停，查看动画</span>
+  </div>
+
+
+  <div class="background-guodu">
+  </div>
+
+
+  <div class="loading-wrap">
+    <div class="loading1">
+
+    </div>
+  </div>
+
+
+  <div class="loading-circle">
+
+</div>
+</body>
+
+
+</html>
