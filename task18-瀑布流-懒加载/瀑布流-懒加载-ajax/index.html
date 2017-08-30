@@ -72,7 +72,6 @@
             当地时间2016年3月1日，在东部与亲俄武装作战中受伤的乌克兰士兵接受海豚治疗。
           </p>
         </li>-->
-
         <!-- 用于计算 item 宽度和列数，但不展示出来-->
         <li class="item hide"></li>
       </ul>
@@ -185,15 +184,10 @@ function pinterestLayout(node){
 
 
 function isVisible(){
-  var $scrollTop = $(window).scrollTop(),
-      $winH = $(window).height(),
-      $offsetTop = $loadMore.offset().top;
-
-  console.log('hhh');
-  console.log($winH);
-  console.log($scrollTop);
-  console.log($offsetTop);
-  if ($offsetTop < $scrollTop + $winH){
+  var scrollTop = $(window).scrollTop(),
+      winH = window.innerHeight;
+      offsetTop = $loadMore.offset().top;
+  if (offsetTop < scrollTop + winH){
     return true;
   } else {
     return false;

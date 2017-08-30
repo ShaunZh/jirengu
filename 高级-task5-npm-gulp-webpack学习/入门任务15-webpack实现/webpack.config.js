@@ -5,8 +5,12 @@ module.exports = {
   entry: './www/src/js/app/index.js',
   output: {
     filename: "app.bundle.js",
-    path: path.resolve(__dirname + '/www/src/js/app/')
+    path: path.resolve(__dirname + '/dist/js/')
   },
+  /*plugins: [
+    new UglifyJSPlugin()
+  ],*/
+  devtool: "source-map",
 
    module:{
      rules: [

@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-18 16:51:23
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-07-25 11:15:20
+* @Last Modified time: 2017-08-30 10:15:07
 */
 //import $ from 'jquery'
 
@@ -43,7 +43,8 @@ const $ = require('jquery');
       var _this = this;
       $.each(msgs, function(index, msg){
         var $node = _this.getNode(msg);
-        $node.find('img').load(function(){
+        console.log($node.find('img'));
+        $node.find('img').on('load', function(){
           _this.insertNode($node);
           _this.pinterestLayout($node);
         })

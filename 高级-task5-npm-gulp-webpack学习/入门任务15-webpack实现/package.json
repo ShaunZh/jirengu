@@ -5,7 +5,9 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack"
+    "build": "webpack -p",
+    "open" : "anywhere -d ./dist/",
+    "start": "npm build && gulp build && npm run open"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +15,13 @@
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "css-loader": "^0.28.4",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^3.0.0",
     "html-loader": "^0.4.5",
     "jquery": "^3.2.1",
     "path": "^0.12.7",

@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-17 09:21:38
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-07-19 14:53:50
+* @Last Modified time: 2017-08-30 11:44:12
 */
 /*
 * @Author: Marte
@@ -301,10 +301,14 @@ header nav li>a:hover{
   background-color: #D5D0D0;
 }
 
+.news-proj {
+  background-color: #f7f7f7;
+}
 .news-proj .water-fall{
   position: relative;
   max-width: 960px;
   margin: 0 auto;
+
 }
 
 .news-proj .water-fall .img-item {
